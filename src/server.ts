@@ -1,15 +1,13 @@
+import express from "express";
+import dotenv from "dotenv";
+import clientRoutes from "./routes/client-routes";
 
-import express from 'express';
+dotenv.config();
 
 const app = express();
+app.use(express.json());
 
-const port = 3000;
+app.use("/api/clients", clientRoutes);
 
-app.get('/', (req, res) => {
-
-  res.send('Hello, TypeScript + Node.js + Express!');
-});
-
-app.listen(port, () => {
-  console.log(`Server is running on http://localhost:${port}`);
-});
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
